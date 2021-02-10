@@ -20,11 +20,7 @@
 
 	var can_activate = true;
 
-	if ($("#buttonActivate").touchstart) {
-		$("#buttonActivate").touchstart(button_down_trigger);
-	} else {
-		$("#buttonActivate").mousedown(button_down_trigger);
-	}
+	$("#buttonActivate").focus(button_down_trigger);
 
 	function button_down_trigger() {
 		if (can_activate) {
