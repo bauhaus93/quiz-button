@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="row"> 
+<div class="row">
 	<div class="col d-flex justify-content-center">
         <h1>Room: {{ room_code }}</h1>
 	</div>
@@ -20,6 +20,7 @@
 
 	var can_activate = true;
 	$("#buttonActivate").mousedown(button_down_trigger);
+	$("#buttonActivate").hover(() => { alert("LEL");});
 
 	function button_down_trigger() {
 		if (can_activate) {

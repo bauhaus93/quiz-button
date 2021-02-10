@@ -4,4 +4,4 @@ venv/
 .git/
 *.db
 *.pem
-
+connect_instance.sh
