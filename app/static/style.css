@@ -1,7 +1,7 @@
 .btn-circle {
-  padding-top: 50%;
-  padding-bottom: 50%;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
-  font-size: 20vw;
+  font-size: 50px;
   text-align: center;
 }

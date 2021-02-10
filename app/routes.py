@@ -22,8 +22,8 @@ def index():
 def new_room():
     code = create_random_room()
     if code:
-        return redirect(url_for("room", room_code=code))
-    return redirect(url_for("index"))
+        return str(code)
+    return "None"
 
 
 @app.route("/room/button")

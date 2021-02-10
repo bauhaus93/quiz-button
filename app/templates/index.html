@@ -2,30 +2,57 @@
 
 {% block content %}
 <div class="row">
-	<div class="col">
+	<div class="col d-flex justify-content-center">
 		<h1>Quiz Button</h1>
 	</div>
 </div>
 
-<div class="my-3 d-grid gap-2 d-block">
-	<form action="{{ url_for('new_room') }}" method="GET">
-	<div class="d-grid gap-2 d-block">
-		<button type="submit" class="btn btn-primary">New Room</button>
-	</div>
-	</form>
+<div class="row">
+    <div class="col d-grid gap-2 d-block">
+        <input type="button" class="btn btn-primary" id="buttonCreate" value="New Room">
+   </div>
 </div>
 
-<div class="my-4">
-	<form action="{{ url_for('room') }}" method="GET">
-		<div class="mb-2">
+<div class="mt-4">
+    <div class="row">
+        <div class="col">
 			<input type="text" class="form-control" id="inputRoomCode" name="room_code" maxlength=4 placeholder="4-character room code">
 		</div>
-		<div class="d-grid gap-2 d-block">
-			<button type="submit" class="btn btn-primary">Join Room</button>
-		</div>
-	</form>
-<div class="my-3">
+    </div>
+</div>
 
+<div class="mt-2">
+    <div class="row">
+        <div class="col d-grid gap-2 d-block">
+            <input type="button" class="btn btn-primary" id="buttonJoin" value="Join Room">
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#buttonCreate").click(button_create_trigger);
+    $("#buttonJoin").click(button_join_trigger);
+
+    function button_create_trigger() {
+        $.get("{{ url_for('new_room') }}", create_callback);
+    }
+
+    function create_callback(response, status) {
+        if (response == "None") {
+            alert("Could not create room");
+        } else {
+            var query = new URLSearchParams({"room_code": response});
+            document.location.href = "{{ url_for('room') }}?" + query.toString();
+        }
+    }
+
+    function button_join_trigger() {
+        var query = new URLSearchParams({"room_code": $("#inputRoomCode").val()});
+        document.location.href = "{{ url_for('room') }}?" + query.toString();
+    }
+
+</script>
 
 
 {% endblock %}
