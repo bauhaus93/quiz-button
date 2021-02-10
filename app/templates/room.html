@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+	<div class="col">
+		<h1 class="text-center">Room: {{ room_code }}</h1>
+	</div>
+</div>
+
+<div class="row justify-content-center">
+	<div class="col d-flex justify-content-center">
+		<input id="buttonActivate" type="button" class="btn btn-success btn-circle col-12">
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+</script>
+
+<script>
+
+	var can_activate = true;
+	$("#buttonActivate").mousedown(button_down_trigger);
+
+	function button_down_trigger() {
+		if (can_activate) {
+			can_activate = false;
+			$.get("{{ url_for('button_down', room_code = room_code) }}", activation_request_callback);
+		}
+	}
+
+	function activation_request_callback(response, status) {
+		if (response == 0) {
+			window.location.href = "{{ url_for('index') }}";
+		} else {
+			if (response == 1) {
+				document.getElementById("audioHorn").play();
+			}
+			$("#buttonActivate").attr("value", "#" + response);
+			start_reset_timeout();
+		}
+	}
+
+	function start_reset_timeout() {
+		window.setTimeout( () => {
+				can_activate = true;
+				$("#buttonActivate").attr("value", "");
+		},
+		{{ activation_reset }} );
+	}
+</script>
+
+<audio id="audioHorn" src="{{ url_for('static', filename='airhorn.mp3') }}" type="audio/mpeg" preload="auto"></audio>
+
+{% endblock %}

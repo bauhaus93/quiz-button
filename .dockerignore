@@ -1,0 +1,7 @@
+__pycache__/
+nginx/
+venv/
+.git/
+*.db
+*.pem
+

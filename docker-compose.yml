@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  flask:
+    build: .
+    environment:
+      - FLASK_ADDRESS=0.0.0.0:8080
+    expose:
+      - 8080
+
+  nginx:
+    depends_on:
+      - flask
+    build: ./nginx
+    environment:
+      - FLASK_ADDRESS=flask:8080
+      - NGINX_ENTRYPOINT_QUIET_LOGS=1
+    ports:
+      - 80:80

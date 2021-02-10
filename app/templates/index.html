@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col">
+		<h1>Quiz Button</h1>
+	</div>
+</div>
+
+<div class="my-3 d-grid gap-2 d-block">
+	<form action="{{ url_for('new_room') }}" method="GET">
+	<div class="d-grid gap-2 d-block">
+		<button type="submit" class="btn btn-primary">New Room</button>
+	</div>
+	</form>
+</div>
+
+<div class="my-4">
+	<form action="{{ url_for('room') }}" method="GET">
+		<div class="mb-2">
+			<input type="text" class="form-control" id="inputRoomCode" name="room_code" maxlength=4 placeholder="4-character room code">
+		</div>
+		<div class="d-grid gap-2 d-block">
+			<button type="submit" class="btn btn-primary">Join Room</button>
+		</div>
+	</form>
+<div class="my-3">
+
+
+
+{% endblock %}
